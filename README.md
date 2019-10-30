@@ -24,8 +24,8 @@ const containerGroupName = 'cont-tptmdb-preprod'
 const results = await utility.stopAndStart(containerGroupName, 100);
 const { originalProperties, postRestartProperties } = results;
 
-console.log(JSON.stringify(containerDetails, null, 3));
-console.log(JSON.stringify(containerDetails, null, 3));
+console.log(JSON.stringify(originalProperties, null, 3));
+console.log(JSON.stringify(postRestartProperties, null, 3));
 ```
 
 ## Configuration
