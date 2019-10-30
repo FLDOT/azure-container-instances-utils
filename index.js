@@ -78,9 +78,38 @@ const azureContainerInstanceUtils = (optionsConfiguration) => {
         return startOrStop(url);
     }
 
+    const getProperties = (containerGroupName) => {
+        const url = `https://management.azure.com/subscriptions/${options.subscriptionId}/resourceGroups/${options.resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/${containerGroupName}?api-version=2018-10-01`;
+
+        return new Promise((resolve, reject) => {
+            getAccessToken()
+                .then((accessToken) => {
+                    const config = getAxiosConfig(accessToken);
+                    axios.get(url, config)
+                        .then((response) => {
+                            if (response.status === 200) {
+                                resolve(response.data);
+                            }
+                            else {
+                                reject(`Received Status Code: ${response.status} while trying to get container group information for: ${containerGroupName}`);
+                            }
+                        })
+                        .catch((error) => {
+                            console.log('Error', error.message);
+                            reject(error);
+                        })
+                })
+                .catch((error) => {
+                    console.log('Error', error.message);
+                    reject(error);
+                });
+        });
+    }
+
     return {
         stop,
-        start
+        start,
+        getProperties
     }
 }
 
