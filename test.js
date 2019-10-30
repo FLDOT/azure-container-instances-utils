@@ -1,18 +1,18 @@
 require('dotenv').config();
-const azureContainerInstanceUtils = require('./index');
+const getContainerInstanceUtil = require('./index');
 
 const test = async () => {
     const containerGroupName = process.env.CONTAINTER_GROUP_NAME;
-    const utilities = azureContainerInstanceUtils();
+    const utility = getContainerInstanceUtil();
     try {
-        let containerDetails = await utilities.getProperties(containerGroupName);
+        let containerDetails = await utility.getProperties(containerGroupName);
         logInstanceDetails(containerDetails);
 
-        await utilities.stop(containerGroupName);
+        await utility.stop(containerGroupName);
         containerDetails = await utilities.getProperties(containerGroupName);
         logInstanceDetails(containerDetails);
 
-        await utilities.start(containerGroupName);
+        await utility.start(containerGroupName);
         containerDetails = await utilities.getProperties(containerGroupName);
         logInstanceDetails(containerDetails);
     }
