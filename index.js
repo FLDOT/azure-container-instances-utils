@@ -106,10 +106,35 @@ const azureContainerInstanceUtils = (optionsConfiguration) => {
         });
     }
 
+    const stopAndStart = async (containerGroupName, secondsAfterRestartToCollectProperties) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const originalProperties = await getProperties(containerGroupName);
+                await stop(containerGroupName);
+                await start(containerGroupName);
+
+                setTimeout(async () => {
+                    try {
+                        const postRestartProperties = await getProperties(containerGroupName);
+                        resolve({ originalProperties, postRestartProperties });
+                    }
+                    catch (error) {
+                        reject(error);
+                    }
+                }, secondsAfterRestartToCollectProperties * 1000);
+            }
+            catch (error) {
+                reject(error);
+                return;
+            }
+        });
+    }
+
     return {
         stop,
         start,
-        getProperties
+        getProperties,
+        stopAndStart
     }
 }
 

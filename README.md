@@ -3,7 +3,7 @@ Utilities for Azure Container Instances
 
 ## Example
 ``` javascript
-const getContainerInstanceUtil = require('./index');
+const getContainerInstanceUtil = require('@fdot/azure-container-instances-utils');
 const utility = getContainerInstanceUtil();
 const containerGroupName = 'cont-tptmdb-preprod'
 
@@ -12,6 +12,20 @@ console.log(properties);
 
 await utility.stop(containerGroupName);
 await utility.start(containerGroupName);
+```
+
+OR 
+
+``` javascript
+const getContainerInstanceUtil = require('@fdot/azure-container-instances-utils');
+const utility = getContainerInstanceUtil();
+const containerGroupName = 'cont-tptmdb-preprod'
+
+const results = await utility.stopAndStart(containerGroupName, 100);
+const { originalProperties, postRestartProperties } = results;
+
+console.log(JSON.stringify(containerDetails, null, 3));
+console.log(JSON.stringify(containerDetails, null, 3));
 ```
 
 ## Configuration
@@ -37,4 +51,6 @@ RESOURCE_GROUP_NAME=<Add Resource Group Name Here>
 CONTAINTER_GROUP_NAME=<Add Container Group Name Here>
 ```
 
-see test.js
+see test.js and execute via:
+
+> node test.js

@@ -1,9 +1,10 @@
 require('dotenv').config();
 const getContainerInstanceUtil = require('./index');
 
-const test = async () => {
-    const containerGroupName = process.env.CONTAINTER_GROUP_NAME;
-    const utility = getContainerInstanceUtil();
+const containerGroupName = process.env.CONTAINTER_GROUP_NAME;
+const utility = getContainerInstanceUtil();
+
+const testCase1 = async () => {
     try {
         let containerDetails = await utility.getProperties(containerGroupName);
         logInstanceDetails(containerDetails);
@@ -21,11 +22,21 @@ const test = async () => {
     }
 }
 
-const logInstanceDetails = (containerDetails) => {
-    console.log(containerDetails);
-    const containers = containerDetails.properties.containers;
-    console.log(containers);
-    containers.forEach(i => console.log(i.properties.instanceView));
+const testCase2 = async () => {
+    try {
+        const results = await utility.stopAndStart(containerGroupName, 100);
+        const { originalProperties, postRestartProperties } = results;
+        logInstanceDetails(originalProperties);
+        console.log("=========================================================================")
+        logInstanceDetails(postRestartProperties);
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
-test();
+const logInstanceDetails = (containerDetails) => {
+    console.log(JSON.stringify(containerDetails, null, 3));
+}
+
+testCase2();
