@@ -17,8 +17,8 @@ const azureContainerInstanceUtils = (optionsConfiguration) => {
     }
     const authUrl = `https://login.microsoftonline.com/${options.tenantName}/oauth2/token`;
     const authBody = `grant_type=client_credentials&client_id=${options.clientId}&client_secret=${options.clientSecret}&resource=https%3A%2F%2Fmanagement.azure.com%2F`;
-    const getStartUrl = (containerGroupName) => `https://management.azure.com/subscriptions/${options.subscriptionId}/resourceGroups/${options.resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/${containerGroupName}/stop?api-version=2018-10-01`;
-    const getStopUrl = (containerGroupName) => `https://management.azure.com/subscriptions/${options.subscriptionId}/resourceGroups/${options.resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/${containerGroupName}/start?api-version=2018-10-01`;
+    const getStopUrl = (containerGroupName) => `https://management.azure.com/subscriptions/${options.subscriptionId}/resourceGroups/${options.resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/${containerGroupName}/stop?api-version=2018-10-01`;
+    const getStartUrl = (containerGroupName) => `https://management.azure.com/subscriptions/${options.subscriptionId}/resourceGroups/${options.resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/${containerGroupName}/start?api-version=2018-10-01`;
 
     const getAccessToken = () => {
         return new Promise((resolve, reject) => {
