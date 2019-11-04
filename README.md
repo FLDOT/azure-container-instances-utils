@@ -48,7 +48,7 @@ CLIENT_ID=<Add Client ID Here>
 CLIENT_SECRET=<Add Client Secret Here>
 SUBSCRIPTION_ID=<Add Subscription ID Here>
 RESOURCE_GROUP_NAME=<Add Resource Group Name Here>
-CONTAINTER_GROUP_NAME=<Add Container Group Name Here>
+CONTAINER_GROUP_NAME=<Add Container Group Name Here>
 ```
 
 see test.js and execute via:

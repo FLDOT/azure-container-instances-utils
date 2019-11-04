@@ -1,7 +1,7 @@
 require('dotenv').config();
 const getContainerInstanceUtil = require('./index');
 
-const containerGroupName = process.env.CONTAINTER_GROUP_NAME;
+const containerGroupName = process.env.CONTAINER_GROUP_NAME;
 const utility = getContainerInstanceUtil();
 
 const testCase1 = async () => {
